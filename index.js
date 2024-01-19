@@ -36,3 +36,8 @@ downloadLink.href = url;
 downloadLink.download = 'data.csv';
 
 console.log(downloadLink)
+
+// append link, trigger download, remove link
+document.body.appendChild(downloadLink);
+downloadLink.click();
+document.body.removeChild(downloadLink);
