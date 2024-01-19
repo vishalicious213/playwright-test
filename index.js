@@ -29,3 +29,10 @@ const url = URL.createObjectURL(blob);
 
 console.log(blob)
 console.log(url)
+
+// create download link
+const downloadLink = document.createElement('a');
+downloadLink.href = url;
+downloadLink.download = 'data.csv';
+
+console.log(downloadLink)
