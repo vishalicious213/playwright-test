@@ -1,5 +1,6 @@
 // EDIT THIS FILE TO COMPLETE ASSIGNMENT QUESTION 1
-const { chromium } = require("playwright");
+const { chromium } = require("playwright")
+const fs = require("fs")
 
 async function saveHackerNewsArticles() {
     // launch browser
@@ -20,16 +21,34 @@ async function saveHackerNewsArticles() {
             const title = article.innerText
             const url = article.href
             const unneeded = article.childNodes[0].firstChild
-            // console.table(title, url, plop)
+            // console.table(title, url, unneeded)
             if (!unneeded) {
                 articlesArray.push([title, url])
             }
         }
 
-        console.log(articlesArray.slice(0, 10))
+        return articlesArray.slice(0, 10)
     })
+
+    return articles
+}
+
+function createCSV(data) {
+    // convert data to csv string
+    function convertToCSV(data) {
+        const csvArray = []
+        data.forEach(row => {
+            csvArray.push(row.join(','))
+        });
+        return csvArray.join('\n')
+    }
+
+    const csvString = convertToCSV(data)
+    console.log(csvString)
 }
 
 (async () => {
-    await saveHackerNewsArticles()
+    const articles = await saveHackerNewsArticles()
+    // console.log(articles)
+    createCSV(articles)
 })();

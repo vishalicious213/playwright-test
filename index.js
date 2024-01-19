@@ -35,4 +35,4 @@ function createCSV(data) {
     document.body.removeChild(downloadLink);
 }
 
-// createCSV(csvData)
+createCSV(csvData)
