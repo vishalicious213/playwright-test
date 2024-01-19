@@ -44,7 +44,15 @@ function createCSV(data) {
     }
 
     const csvString = convertToCSV(data)
-    console.log(csvString)
+    // console.log(csvString)
+
+    // filename for csv
+    const csvFile = "top-ten.csv"
+
+    // write to file
+    fs.writeFileSync(csvFile, csvString, "utf-8")
+
+    console.log("CSV file created at: ", csvFile )
 }
 
 (async () => {
