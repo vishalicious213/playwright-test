@@ -26,7 +26,7 @@ async function saveHackerNewsArticles() {
             }
         }
 
-        console.log(articlesArray)
+        console.log(articlesArray.slice(0, 10))
     })
 }
 
