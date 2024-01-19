@@ -8,36 +8,31 @@ const csvData = [
     ['Bob', 22, 'Los Angeles']
 ];
 
-console.log(csvData)
+function createCSV(data) {
+    // convert data to csv string
+    function convertToCSV(data) {
+        const csvArray = [];
+        data.forEach(row => {
+            csvArray.push(row.join(','));
+        });
+        return csvArray.join('\n');
+    }
 
-// convert data to csv string
-function convertToCSV(data) {
-    const csvArray = [];
-    data.forEach(row => {
-        csvArray.push(row.join(','));
-    });
-    return csvArray.join('\n');
+    const csvString = convertToCSV(data);
+
+    // create blob and url
+    const blob = new Blob([csvString], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+
+    // create download link
+    const downloadLink = document.createElement('a');
+    downloadLink.href = url;
+    downloadLink.download = 'data.csv';
+
+    // append link, trigger download, remove link
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
 }
 
-const csvString = convertToCSV(csvData);
-
-console.log(csvString)
-
-// create blob and url
-const blob = new Blob([csvString], { type: 'text/csv' });
-const url = URL.createObjectURL(blob);
-
-console.log(blob)
-console.log(url)
-
-// create download link
-const downloadLink = document.createElement('a');
-downloadLink.href = url;
-downloadLink.download = 'data.csv';
-
-console.log(downloadLink)
-
-// append link, trigger download, remove link
-document.body.appendChild(downloadLink);
-downloadLink.click();
-document.body.removeChild(downloadLink);
+createCSV(csvData)
