@@ -15,14 +15,13 @@ async function saveHackerNewsArticles() {
     const articles = await page.evaluate(() => {
         const articleData = document.querySelectorAll(".titleline a")
         const articlesArray = []
-        // console.log(articleData)
 
         // trim out the links that aren't articles
         for (const article of articleData) {
             const title = article.innerText
             const url = article.href
             const unneeded = article.childNodes[0].firstChild
-            // console.table(title, url, unneeded)
+
             if (!unneeded) {
                 articlesArray.push([title, url])
             }
@@ -39,14 +38,15 @@ function createCSV(data) {
     // convert data to csv string
     function convertToCSV(data) {
         const csvArray = [["Title", "URL"],]
+
         data.forEach(row => {
             csvArray.push(row.join(','))
-        });
+        })
+
         return csvArray.join('\n')
     }
 
     const csvString = convertToCSV(data)
-    // console.log(csvString)
 
     // filename for csv (will save in root of project folder)
     const csvFile = "top-ten.csv"
@@ -59,6 +59,5 @@ function createCSV(data) {
 
 (async () => {
     const articles = await saveHackerNewsArticles()
-    // console.log(articles)
     createCSV(articles)
-})();
+})()

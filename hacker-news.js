@@ -41,7 +41,7 @@ function createCSV(data) {
         const csvArray = [["Title", "URL"],]
         data.forEach(row => {
             csvArray.push(row.join(','))
-        });
+        })
         return csvArray.join('\n')
     }
 
