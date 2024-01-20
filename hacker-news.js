@@ -17,6 +17,7 @@ async function saveHackerNewsArticles() {
         const articlesArray = []
         // console.log(articleData)
 
+        // trim out the links that aren't articles
         for (const article of articleData) {
             const title = article.innerText
             const url = article.href
@@ -27,6 +28,7 @@ async function saveHackerNewsArticles() {
             }
         }
 
+        // return the top 10 articles
         return articlesArray.slice(0, 10)
     })
 
@@ -46,7 +48,7 @@ function createCSV(data) {
     const csvString = convertToCSV(data)
     // console.log(csvString)
 
-    // filename for csv
+    // filename for csv (will save in root of project folder)
     const csvFile = "top-ten.csv"
 
     // write to file
