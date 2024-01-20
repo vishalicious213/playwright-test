@@ -36,7 +36,7 @@ async function saveHackerNewsArticles() {
 function createCSV(data) {
     // convert data to csv string
     function convertToCSV(data) {
-        const csvArray = []
+        const csvArray = [["Title", "URL"],]
         data.forEach(row => {
             csvArray.push(row.join(','))
         });
