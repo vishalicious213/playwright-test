@@ -21,6 +21,10 @@ fs.readFile(csvFilePath, 'utf8', (err, data) => {
         }, {})
     })
 
-    console.log('CSV data:', results)
-    // Do something with the parsed data
+    // Display the contents of the CSV file
+    results.forEach(result => {
+        console.log("Title: ", result.Title)
+        console.log("URL: ", result.URL)
+        console.log("")
+    })
 })
