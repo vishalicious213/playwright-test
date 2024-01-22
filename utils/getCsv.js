@@ -22,9 +22,10 @@ fs.readFile(csvFilePath, 'utf8', (err, data) => {
     })
 
     // Display the contents of the CSV file
+    console.log("\n-+- TOP TEN ARTICLES FROM HACKER NEWS -+- \n")
+
     results.forEach(result => {
         console.log("Title: ", result.Title)
-        console.log("URL: ", result.URL)
-        console.log("")
+        console.log("URL:   ", result.URL, "\n")
     })
 })
