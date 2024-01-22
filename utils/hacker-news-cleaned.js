@@ -9,6 +9,8 @@ async function saveHackerNewsArticles() {
     const context = await browser.newContext()
     const page = await context.newPage()
 
+    console.log("\x1b[33m"+"\n-+- GETTING TOP 10 ARTICLES FROM HACKER NEWS -+-\n"+"\x1b[0m")
+
     // go to Hacker News
     await page.goto("https://news.ycombinator.com")
 
@@ -32,6 +34,7 @@ async function saveHackerNewsArticles() {
         return articlesArray.slice(0, 10)
     })
 
+    await page.close()
     return articles
 }
 
@@ -58,7 +61,6 @@ function createCSV(data) {
     console.log("CSV file created at: ", csvFile )
 }
 
-
 function readCSV(filename) {
     // Read the CSV file
     fs.readFile(filename, 'utf8', (err, data) => {
@@ -80,15 +82,14 @@ function readCSV(filename) {
         })
 
         // Display the contents of the CSV file
-        // console.log("")
-        console.log("\n", "TOP TEN ARTICLES FROM HACKER NEWS", "\n")
-        // console.log("")
+        console.log("\x1b[33m"+"\n-+- TOP TEN ARTICLES FROM HACKER NEWS -+- \n"+"\x1b[0m")
 
         results.forEach(result => {
             console.log("Title: ", result.Title)
-            console.log("URL:   ", result.URL)
-            console.log("")
+            console.log("URL:   ", result.URL, "\n")
         })
+
+        console.log("\x1b[31m"+"\nCancel this process and return to the terminal by pressing CONTROL-C"+"\x1b[0m")
     })
 }
 
